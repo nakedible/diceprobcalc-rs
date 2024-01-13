@@ -18,6 +18,39 @@ impl IsSuccess for Result {
     }
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
+pub enum Difficulty {
+    Terrible,
+    Poor,
+    Mediocre,
+    Average,
+    Fair,
+    Good,
+    Great,
+    Superb,
+    Fantastic,
+    Epic,
+    Legendary,
+}
+
+impl From<Difficulty> for i64 {
+    fn from(difficulty: Difficulty) -> Self {
+        match difficulty {
+            Difficulty::Terrible => -2,
+            Difficulty::Poor => -1,
+            Difficulty::Mediocre => 0,
+            Difficulty::Average => 1,
+            Difficulty::Fair => 2,
+            Difficulty::Good => 3,
+            Difficulty::Great => 4,
+            Difficulty::Superb => 5,
+            Difficulty::Fantastic => 6,
+            Difficulty::Epic => 7,
+            Difficulty::Legendary => 8,
+        }
+    }
+}
+
 pub fn roll() -> Prob<i64> {
     let roll = fair(-1, 1);
     roll.add(&roll).add(&roll).add(&roll)

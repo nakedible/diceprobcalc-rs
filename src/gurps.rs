@@ -18,6 +18,43 @@ impl IsSuccess for Result {
     }
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
+pub enum Difficulty {
+    Automatic,
+    Trivial,
+    VeryEasy,
+    Easy,
+    VeryFavorable,
+    Favorable,
+    Average,
+    Unfavorable,
+    VeryUnfavorable,
+    Hard,
+    VeryHard,
+    Dangerous,
+    Impossible,
+}
+
+impl From<Difficulty> for i64 {
+    fn from(difficulty: Difficulty) -> Self {
+        match difficulty {
+            Difficulty::Automatic => 10,
+            Difficulty::Trivial => 8,
+            Difficulty::VeryEasy => 6,
+            Difficulty::Easy => 4,
+            Difficulty::VeryFavorable => 2,
+            Difficulty::Favorable => 1,
+            Difficulty::Average => 0,
+            Difficulty::Unfavorable => -1,
+            Difficulty::VeryUnfavorable => -2,
+            Difficulty::Hard => -4,
+            Difficulty::VeryHard => -6,
+            Difficulty::Dangerous => -8,
+            Difficulty::Impossible => -10,
+        }
+    }
+}
+
 pub fn roll() -> Prob<i64> {
     let roll = fair(1, 6);
     roll.add(&roll).add(&roll)
